@@ -1,3 +1,11 @@
-/* 
-    General Styles
-*/
+.carrusel {
+  width: 100%;
+  overflow-x: scroll;
+    
+    
+  }
+.logo {
+  width: 100px;
+ 
+
+}
