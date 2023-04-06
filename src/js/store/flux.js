@@ -16,10 +16,21 @@ const getState = ({ getStore, getActions, setStore }) => {
       fetchCharacters: async () => {
         try {
           const store = getStore();
+          const localPersonajes= JSON.parse(
+            localStorage.getItem("personajes")
+          );
+          if(localPersonajes){
+            setStore({...store,personajesSwapi: localPersonajes});
+            return;
+          }
           for (let index=1; index <=15; index++){
           const response = await fetch(`https://www.swapi.tech/api/people/${index}`);
           if (response.ok) {
             const data = await response.json();
+            localStorage.setItem(
+              "personaje",
+              JSON.stringify(data)
+            );
             setStore({ ...store, personajesSwapi: [...store.personajesSwapi, data.result] });
           }
         }
@@ -31,14 +42,24 @@ const getState = ({ getStore, getActions, setStore }) => {
         try {
           
           const store = getStore();
-          for (let index=1; index <=15; index++){
+          const localPlanetas= JSON.parse(localStorage.getItem("planetas"));
+          if(localPlanetas){
+            setStore({...store,planetasSwapi: localPlanetas});
+            return;
+          };
+          for (let index=2; index <=15; index++){
           const response = await fetch(`https://www.swapi.tech/api/planets/${index}`);
           if (response.ok) {
             const data = await response.json();
-            console.log(data);
+            
+            localStorage.setItem(
+              "planeta",
+              JSON.stringify(data)
+            );
             setStore({ ...store, planetasSwapi: [...store.planetasSwapi, data.result] });
             
           }
+        
         }
         } catch (error) {
           console.log(error);
@@ -56,7 +77,6 @@ const getState = ({ getStore, getActions, setStore }) => {
       
      }
      console.log(store.favorites)
-     
             }
 
       

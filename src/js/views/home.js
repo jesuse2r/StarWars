@@ -12,11 +12,14 @@ export const Home = () => {
   return (
     <div className="text-center mt-5 container  ">
       <h2 className="text-dark text-left text-start">Personajes</h2>
+      
       <div className="carrusel">
         <div className="d-flex gap-5">
+          
+
           {store.personajesSwapi.map((personaje) => {
             return (
-              <div className="card" style={{ minWidth: "18rem" }}>
+              <div className="card" key={personaje._id} style={{ minWidth: "18rem" }}>
                 <img
                   src={`https://starwars-visualguide.com/assets/img/characters/${personaje.uid}.jpg`}
                   className="card-img-top"
@@ -46,8 +49,8 @@ export const Home = () => {
                
                   {
                     store.favorites.some((fav) => fav._id === personaje._id)
-                    ? <i class="fas fa-heart btn-end"></i>
-                    : <i class="far fa-heart btn-end"></i>
+                    ? <i className="fas fa-heart btn-end"></i>
+                    : <i className="far fa-heart btn-end"></i>
                   }
                   
                    
@@ -65,7 +68,7 @@ export const Home = () => {
         <div className="d-flex gap-5">
           {store.planetasSwapi.map((planeta) => {
             return (
-              <div className="card" style={{ minWidth: "18rem" }}>
+              <div className="card" key={planeta._id}style={{ minWidth: "18rem" }}>
                 <img
                   src={`https://starwars-visualguide.com/assets/img/planets/${planeta.uid}.jpg`}
                   className="card-img-top"
@@ -91,8 +94,8 @@ export const Home = () => {
                
                   {
                     store.favorites.some((fav) => fav._id === planeta._id)
-                    ? <i class="fas fa-heart btn-end"></i>
-                    : <i class="far fa-heart btn-end"></i>
+                    ? <i className="fas fa-heart btn-end"></i>
+                    : <i className="far fa-heart btn-end"></i>
                   }
                   
                    
