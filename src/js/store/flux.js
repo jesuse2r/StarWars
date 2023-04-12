@@ -7,7 +7,7 @@ const getState = ({ getStore, getActions, setStore }) => {
       todoList: ["tarea de prueba"],
       personajesSwapi: [],
       planetasSwapi: [],
-      favorites: [],
+      favorites: JSON.parse(localStorage.getItem("favorites"))||[],
     },
 
 
@@ -43,6 +43,7 @@ const getState = ({ getStore, getActions, setStore }) => {
           
           const store = getStore();
           const localPlanetas= JSON.parse(localStorage.getItem("planetas"));
+          
           if(localPlanetas){
             setStore({...store,planetasSwapi: localPlanetas});
             return;
@@ -72,8 +73,10 @@ const getState = ({ getStore, getActions, setStore }) => {
      if (favorite) {
       const newFavorite = store.favorites.filter((fav)=> fav._id !== item._id)
       setStore({...store, favorites: newFavorite})
+      localStorage.setItem("favorites",JSON.stringify(store.favorites))
      }else{
       setStore({...store, favorites:[...store.favorites, item]});
+      localStorage.setItem("favorites",JSON.stringify(store.favorites))
       
      }
      console.log(store.favorites)
